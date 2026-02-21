@@ -6,24 +6,24 @@ Vagrant.configure("2") do |config|
   config.vm.define "nmetaisS" do |server|
     server.vm.hostname = "nmetaisS"
     server.vm.network "private_network", ip: "192.168.56.110"
-    config.vm.provider "virtualbox" do |vb|
-      vb.customize ["modifyvm", :id, "--name", "nmetaisS"]
+    server.vm.provider "virtualbox" do |vb|
+      vb.name = "nmetaisS"
       vb.memory = 2048
       vb.cpus = 2
     end
 
-    config.vm.provision "shell", path: "server.sh"
+    server.vm.provision "shell", path: "scripts/server.sh"
   end
 
   #WORKER
   config.vm.define "nmetaisSW" do |worker|
     worker.vm.hostname = "nmetaisSW"
     worker.vm.network "private_network", ip: "192.168.56.111"
-    config.vm.provider "virtualbox" do |vb|
-      vb.customize ["modifyvm", :id, "--name", "nmetaisSW"]
+    worker.vm.provider "virtualbox" do |vb|
+      vb.name = "nmetaisSW"
       vb.memory = 512
       vb.cpus = 1
     end
-    config.vm.provision "shell", path: "worker.sh"
+    worker.vm.provision "shell", path: "scripts/worker.sh"
   end
 end
