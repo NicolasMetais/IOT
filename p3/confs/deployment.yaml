@@ -1,9 +1,10 @@
-apiVersion: argoproj.io/v1alpha
+apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app
+  name: deployment
   namespace: argocd
 spec:
+  project: default
   destination:
     namespace: dev
     server: https://kubernetes.default.svc
@@ -15,4 +16,6 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
     
