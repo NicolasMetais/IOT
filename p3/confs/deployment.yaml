@@ -9,7 +9,7 @@ spec:
     namespace: dev
     server: https://kubernetes.default.svc
   source:
-    repoURL: https://github.com/NicolasMetais/IOT-argoCD.git
+    repoURL: https://github.com/NicolasMetais/IOT-argoCD-nmetais.git
     targetRevision: HEAD
     path: .
   syncPolicy:

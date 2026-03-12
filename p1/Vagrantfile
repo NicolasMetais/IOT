@@ -1,6 +1,6 @@
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "debian/bookworm64"
+  config.vm.box = "debian/trixie"
 
   #SERVER
   config.vm.define "nmetaisS" do |server|
@@ -18,7 +18,8 @@ Vagrant.configure("2") do |config|
   #WORKER
   config.vm.define "nmetaisSW" do |worker|
     worker.vm.hostname = "nmetaisSW"
-    worker.vm.network "private_network", ip: "192.168.56.111"
+    worker.vm.network "private_network", type: "dhcp"
+    worker.vm.network "private_network", ip: "192.168.56.111", auto_config: true
     worker.vm.provider "virtualbox" do |vb|
       vb.name = "nmetaisSW"
       vb.memory = 512
@@ -27,3 +28,5 @@ Vagrant.configure("2") do |config|
     worker.vm.provision "shell", path: "scripts/worker.sh"
   end
 end
+
+#cd /home/iot/VirtualBox\ VMs/ in case virtualbox is trolling
